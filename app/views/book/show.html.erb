@@ -1,0 +1,27 @@
+<html>
+
+ <head>
+   <style>
+     body{
+         width : 100%;
+         display: block;
+     }
+     ul li{
+
+         list-style: none;
+         padding: 10px;
+
+     }
+   </style>
+ </head>
+</html>
+<body>
+    <h1>Day la view show</h1>
+    <ul>
+      <% @user.each do |use| %>
+          <li>
+            <%= use.username %>
+          </li>
+      <% end %>
+    </ul>
+</body>

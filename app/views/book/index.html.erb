@@ -1,0 +1,48 @@
+<%= render "book/part/header" %>
+    <div class="main-wrap">
+      <div class="sidebar-group">
+        <h3>My Group</h3>
+        <ul>
+          <% @groups.each do |group| %>
+              <li>
+                <a href="<%=request.domain %>/group/<%= group.id %>"> <%= group.name %></p></a>
+              </li>
+          <% end %>
+        </ul>
+        <%= render "book/part/sidebar_recomgroup" %>
+      </div>
+      <div class="main-content">
+        <h3>Trang chủ của <%=@user.username %></h3>
+        <div id="createpost">
+          <form action="<%=request.domain%>/postnew" method="post">
+            <textarea type="text" name="content"></textarea>
+            <input type="hidden" name="position" value="<%=@position%>"/>
+            <input type="submit" value="Send">
+          </form>
+        </div>
+        <ul>
+          <% @posts.each do |post| %>
+              <li>
+                <p> <%= post.content %></p>
+                <p class="author"><%=User.find(post.id_author).username %></p>
+                <p class="time"> <%= post.time %></p>
+                <ul class="comment">
+                  <%
+                     postchilds = Comment.where(["id_post = ?", post.id]);
+                     postchilds.each do |child|
+                  %>
+                   <li><p class="content-comment"><%=child.content%></p> <p class="author"><%=User.find(child.id_author).username %></p></li>
+                  <% end %>
+                  <form action="<%=request.domain%>/postcomment" method="post">
+                      <input type="text" name="content"/>
+                      <input type="hidden" name="id_post" value="<%=post.id%>"/>
+                      <input type="submit" value="Send">
+                  </form>
+                </ul>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <%= render "book/part/sidebar_friend" %>
+    </div>
+</body>

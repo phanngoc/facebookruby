@@ -1,0 +1,36 @@
+<div class="recomgroup">
+<h3>Recommend Group</h3>
+    <ul>
+      <%
+         @recogroup = Usergroup.where(["id_user != ?",@usercurrent.id]).select('DISTINCT id_group').limit(6);
+      %>
+      <%
+         @recogroup.each do |re|
+            check = Usergroup.where(["id_user = ? and id_group = ?",@usercurrent.id,re.id_group]);
+           if check.count == 0
+      %>
+          <li>
+            <a href="<%=request.domain %>/group/<%= re.id_group %>" class="namegroup"><p><%= Group.find(re.id_group).name %></p></a>
+            <a href="/addgroup/<%= re.id_group %>" class="addgroup"><img src="/images/addicon.png" width="30" height="30"/></a>
+          </li>
+          <%end%>
+         <% end %>
+    </ul>
+</div>
+
+<style type="text/css">
+  .recomgroup ul li a.namegroup{
+      display: block;
+      max-width: 184px;
+      float : left;
+  }
+  .recomgroup ul li a.addgroup{
+      display: block;
+      max-width: 30px;
+      float: right;
+  }
+  .recomgroup ul li{
+      display: block;
+      min-height: 35px;
+  }
+</style>

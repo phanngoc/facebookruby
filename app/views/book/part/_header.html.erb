@@ -1,0 +1,182 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+      *{
+          margin : 0px;
+          padding : 0px;
+      }
+      body {
+          width: 100%;
+          display: block;
+      }
+      .sidebar-group{
+          display: block;
+          width : 20%;
+          float : left;
+          margin-right: 10px;
+      }
+      .sidebar-group ul li{
+          list-style: none;
+          padding: 10px 5px 10px 5px;
+          margin : 3px;
+          border : 1px solid #cccff9;
+      }
+      .sidebar-group ul li a{
+          text-decoration: none;
+          color : #223a66;
+      }
+      .sidebar-group h3,.main-content h3,#sidebar_friend h3{
+          background-color: #2f497c;
+          color : white;
+          text-align: center;
+          padding-top : 15px;
+          padding-bottom : 15px;
+          width : 100%;
+      }
+      .main-content{
+          display: block;
+          width : 51%;
+          float : left;
+      }
+
+      .main-content>ul>li{
+          list-style: none;
+          padding: 10px;
+          background-color : #878FFF;
+          color : white;
+          margin-bottom : 3px;
+          display: block;
+          width: 575px;
+          float : left;
+          border : 3px solid #2f497c;
+          border-radius: 5px;
+      }
+      .main-content>ul>li p.time{
+          font-size : 14px;
+      }
+      .main-content>ul>li>p.author{
+          text-align: right;
+          color : #f9f45e;
+          font-weight: bold;
+      }
+      .main-content .comment li{
+          background-color : #e1e8f7;
+          color : black;
+          border : 1px dashed #878fff;
+          padding : 5px 2px 5px 2px;
+          margin : 2px;
+      }
+      .main-content .comment li .author{
+          text-align: right;
+          color : #3d7c24;
+          font-weight: bold;
+      }
+      header{
+          display: block;
+          width : 100%;
+          height: 50px;
+          background-color: #91a2c4;
+      }
+      header .inner-header{
+          display: block;
+          width : 80%;
+          height: 50px;
+          margin : 0px auto;
+      }
+      header .inner-header .logo{
+          display: block;
+          float: left;
+          height: 100%;
+      }
+      header .inner-header .logo img{
+          width: 45px;
+          height : 45px;
+      }
+      header .inner-header .hi{
+          display: block;
+          height: 100%;
+          float: right;
+          width: 240px;
+          padding-top: 14px;
+      }
+      header .inner-header .hi p {
+          display: block;
+          float : left;
+      }
+      header .inner-header .hi .logout{
+          display: block;
+          text-decoration: none;
+          color: white;
+          float: left;
+          margin-left: 10px;
+          background-color: #3B5999;
+          border-radius: 7px;
+          padding: 3px 7px 3px 7px;
+          margin-top: -3px;
+      }
+      header .inner-header .hi .message{
+          display: block;
+          float: left;
+          margin-top: -4px;
+          margin-right: 13px;
+      }
+      #createpost{
+          display: block;
+          width: 100%;
+          height: 100px;
+          padding-top : 15px;
+      }
+      #createpost form {
+          display: block;
+          width: 100%;
+          height: 100%;
+      }
+      #createpost form textarea{
+          display: block;
+          width: 80%;
+          height: 90px;
+          float : left;
+      }
+      #createpost form input[type=submit]
+      {
+              display: block;
+              width: 82px;
+              height: 34px;
+              float : left;
+      }
+
+      #sidebar_friend{
+          display: block;
+          width: 20%;
+          float : left;
+      }
+      #sidebar_friend .inner-wrap{
+          display: block;
+          width: 100%;
+          height: 100%;
+      }
+      #sidebar_friend .inner-wrap ul li{
+          display: block;
+          list-style: none;
+          padding: 5px 5px 1px 5px;
+          margin: 7px;
+          border : 1px solid #cccff9;
+      }
+  </style>
+</head>
+</html>
+<body>
+<div class="main-wrap">
+  <header>
+    <div class="inner-header">
+      <div class="logo">
+        <a href="/home/<%= @usercurrent.id%>"><%= image_tag 'fb_icon_325x325.png', alt: 'a face that is unnervingly happy'%></a>
+      </div>
+      <div class="hi">
+        <a href="/showmessage/1" class="message"><img src="/images/fa-message.png" width="30" height="30"></a>
+        <p>Chào <b><%= @usercurrent.username%></b></p>
+        <a href="/logout" class="logout">Log Out</a>
+      </div>
+    </div>
+  </header>

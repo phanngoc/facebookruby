@@ -1,0 +1,91 @@
+<div id="sidebar_friend">
+  <div class="inner-wrap">
+    <h3>My Friend</h3>
+    <ul class="know">
+      <%
+         id = @usercurrent.id;
+         @id_friend = Friend.where(["id_me = ?",id]).select('DISTINCT id_you,id_me');
+         @id_friend.each do |idf|
+            friend = User.find(idf.id_you);
+            %>
+            <li><img width="40" height="40" src="/images/user.png"/>
+              <a href="/home/<%=friend.id%>" class="showname">
+              <p><%=friend.username %></p>
+              </a>
+            </li>
+            <%
+         end
+      %>
+    </ul>
+    <h3>People you may be know</h3>
+    <ul class="maybeknow">
+      <%
+         id = @usercurrent.id;
+         @id_friend = Friend.where(["id_me != ? and id_you != ?",id,id]).select('DISTINCT id_you').limit(6);
+
+         @id_friend.each do |idf|
+           @check = Friend.where(["id_me = ? and id_you = ?",id,idf.id_you]);
+           if @check.count == 0
+           friend = User.find(idf.id_you);
+      %>
+          <li><img width="40" height="40" src="/images/user.png"/>
+            <a href="/home/<%=friend.id%>" class="showname">
+              <p><%=friend.username %></p>
+            </a>
+            <a href="/addfriend/<%=friend.id%>" class="addfriend">Add Friend</a>
+          </li>
+      <%
+          end
+         end
+      %>
+    </ul>
+  </div>
+</div>
+<style>
+    #sidebar_friend{
+        margin-top:-14px;
+        margin-left:10px;
+    }
+    #sidebar_friend ul.know li p{
+        text-align:center;
+        width:170px;
+        float:right;
+        margin-top: 7px;
+    }
+    #sidebar_friend ul li a{
+        text-decoration: none;
+        color : black;
+    }
+    #sidebar_friend ul.maybeknow li p{
+        text-align:center;
+        width:100px;
+    }
+
+    #sidebar_friend ul.maybeknow li{
+        position:relative;
+        min-height:62px;
+    }
+
+    #sidebar_friend ul.maybeknow li img{
+        position:absolute;
+    }
+
+    #sidebar_friend ul.maybeknow li .showname{
+        position:absolute;
+        left:100px;
+        top:6px;
+    }
+
+    #sidebar_friend ul.maybeknow li .addfriend{
+        position:absolute;
+        top:32px;
+        left:111px;
+        text-decoration:none;
+        font-size:14px;
+        background-color:blue;
+        padding:4px;
+        color:white;
+        border-radius:10px;
+    }
+
+</style>
